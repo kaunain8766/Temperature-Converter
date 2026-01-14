@@ -3,8 +3,8 @@
 <head>
     <title>Temperature Converter (Python)</title>
 
-    <!-- PyScript CDN -->
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <!-- PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 
     <style>
@@ -40,22 +40,26 @@
         <option value="f_to_c">Fahrenheit to Celsius</option>
     </select>
 
-    <button py-click="convert()">Convert</button>
+    <button id="btn">Convert</button>
 
     <h3 id="result"></h3>
 </div>
 
 <py-script>
-def convert():
-    temp = float(Element("temp").value)
-    choice = Element("choice").value
+from js import document
+
+def convert(event):
+    temp = float(document.getElementById("temp").value)
+    choice = document.getElementById("choice").value
 
     if choice == "c_to_f":
         result = (temp * 9/5) + 32
     else:
         result = (temp - 32) * 5/9
 
-    Element("result").element.innerText = f"Converted Temperature: {result:.2f}"
+    document.getElementById("result").innerText = f"Converted Temperature: {result:.2f}"
+
+document.getElementById("btn").addEventListener("click", convert)
 </py-script>
 
 </body>
