@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter (Python)</title>
+
+    <!-- PyScript CDN -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+        .box {
+            width: 320px;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        input, select, button {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Temperature Converter</h2>
+
+    <input type="number" id="temp" placeholder="Enter Temperature">
+
+    <select id="choice">
+        <option value="c_to_f">Celsius to Fahrenheit</option>
+        <option value="f_to_c">Fahrenheit to Celsius</option>
+    </select>
+
+    <button py-click="convert()">Convert</button>
+
+    <h3 id="result"></h3>
+</div>
+
+<py-script>
+def convert():
+    temp = float(Element("temp").value)
+    choice = Element("choice").value
+
+    if choice == "c_to_f":
+        result = (temp * 9/5) + 32
+    else:
+        result = (temp - 32) * 5/9
+
+    Element("result").element.innerText = f"Converted Temperature: {result:.2f}"
+</py-script>
+
+</body>
+</html>
